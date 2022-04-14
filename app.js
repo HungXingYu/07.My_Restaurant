@@ -35,6 +35,11 @@ app.get('/search' , (req , res) =>{
 
   res.render('index' , {keyword:keyword , restaurants:restaurants})
 })
+
+//顯示後臺管理
+app.get('/backstage' , (req , res)=>{
+  res.render('backstage' , {restaurants:restaurantList.results})
+})
 //#endregion 
 
 //#region  start and listen on the Express server(啟動伺服器)
