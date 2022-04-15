@@ -34,7 +34,7 @@ const Restaurants = require('./models/restaurant')
 //#endregion
 
 //#region  routes setting(設定路由)
-//顯示首頁
+//*顯示首頁
 app.get("/", (req, res) => {
     Restaurants.find()
         .lean()
@@ -42,13 +42,13 @@ app.get("/", (req, res) => {
         .catch(error => console.error(error))
 })
 
-//顯示詳細資料
-app.get("/restaurants/:restaurant_ID", (req, res) => {
-    const restaurant = restaurantList.results.find(
-        (restaurant) => restaurant.id.toString() === req.params.restaurant_ID
-    )
-
-    res.render("show", { restaurant: restaurant })
+//*顯示詳細資料
+app.get("/restaurants/:id", (req, res) => {
+    const id = req.params.id
+    return Restaurants.findById(id)
+        .lean()
+        .then((restaurant) => res.render("show", { restaurant }))
+        .catch(error =>console.error(error))
 })
 
 //顯示搜尋結果
