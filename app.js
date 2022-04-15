@@ -29,7 +29,6 @@ db.once("open", () => {
 })
 //#endregion -
 
-const restaurantList = require("./models/seeds/restaurant.json")
 const Restaurants = require("./models/restaurant")
 //#endregion
 
@@ -38,6 +37,7 @@ const Restaurants = require("./models/restaurant")
 app.get("/", (req, res) => {
     Restaurants.find()
         .lean()
+        .sort({_id: 'asc'})
         .then((restaurants) => res.render("index", { restaurants }))
         .catch((error) => console.error(error))
 })
@@ -80,11 +80,12 @@ app.get("/search", (req, res) => {
 app.get("/backstage", (req, res) => {
     Restaurants.find()
         .lean()
+        .sort({ _id: "asc" })
         .then((restaurants) => res.render("backstage", { restaurants }))
         .catch((error) => console.error(error))
 })
 
-//顯示新增餐廳頁面
+//*顯示新增餐廳頁面
 app.get("/backstage/new", (req, res) => {
     res.render("new")
 })
