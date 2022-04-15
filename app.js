@@ -30,7 +30,7 @@ db.once("open", () => {
 //#endregion -
 
 const restaurantList = require("./models/seeds/restaurant.json")
-const Restaurants = require('./models/restaurant')
+const Restaurants = require("./models/restaurant")
 //#endregion
 
 //#region  routes setting(設定路由)
@@ -38,8 +38,8 @@ const Restaurants = require('./models/restaurant')
 app.get("/", (req, res) => {
     Restaurants.find()
         .lean()
-        .then(restaurants => res.render('index' , {restaurants}))
-        .catch(error => console.error(error))
+        .then((restaurants) => res.render("index", { restaurants }))
+        .catch((error) => console.error(error))
 })
 
 //*顯示詳細資料
@@ -48,22 +48,32 @@ app.get("/restaurants/:id", (req, res) => {
     return Restaurants.findById(id)
         .lean()
         .then((restaurant) => res.render("show", { restaurant }))
-        .catch(error =>console.error(error))
+        .catch((error) => console.error(error))
 })
 
-//顯示搜尋結果
-app.get("/search", (req, res) => {
-    const keyword = req.query.keyword
-    const restaurants = restaurantList.results.filter((restaurant) => {
-        if (
-            restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-            restaurant.category.includes(keyword)
-        ) {
-            return restaurant
-        }
-    })
 
-    res.render("index", { keyword: keyword, restaurants: restaurants })
+//* Search 資料取得與渲染
+app.get("/search", (req, res) => {
+    const keyword = req.query.keyword //* 從URL中傳來的 keyword引數
+    const reg = new RegExp(keyword, "i") //* 不區分大小寫
+    
+    /** 多條件與模糊查詢指令
+     *  多條件查詢: query.$or
+     *  模糊查詢: query.$regex
+     */
+    Restaurants.find({ $or: [{ name: { $regex: reg } }, { name_en: { $regex: reg } }] })
+        .lean()
+        .then((restaurantResults) => {
+            if (restaurantResults.length === 0) {
+                Restaurants.find({ category: { $regex: reg } })
+                    .lean()
+                    .then((restaurantResults) => res.render("index", {keyword ,  restaurants: restaurantResults }))
+                    .catch((error) => console.log(error))
+            } else {
+                res.render("index", { keyword , restaurants: restaurantResults })
+            }
+        })
+        .catch((error) => console.log(error))
 })
 
 //顯示後臺管理頁面
