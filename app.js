@@ -29,7 +29,7 @@ db.once("open", () => {
 })
 //#endregion -
 
-const restaurantList = require("./restaurant.json")
+const restaurantList = require("./models/seeds/restaurant.json")
 //#endregion
 
 //#region  routes setting(設定路由)
