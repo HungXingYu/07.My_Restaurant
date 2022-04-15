@@ -76,9 +76,12 @@ app.get("/search", (req, res) => {
         .catch((error) => console.log(error))
 })
 
-//顯示後臺管理頁面
+//*顯示後臺管理頁面
 app.get("/backstage", (req, res) => {
-    res.render("backstage", { restaurants: restaurantList.results })
+    Restaurants.find()
+        .lean()
+        .then((restaurants) => res.render("backstage", { restaurants }))
+        .catch((error) => console.error(error))
 })
 
 //顯示新增餐廳頁面
