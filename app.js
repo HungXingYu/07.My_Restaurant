@@ -30,12 +30,16 @@ db.once("open", () => {
 //#endregion -
 
 const restaurantList = require("./models/seeds/restaurant.json")
+const Restaurants = require('./models/restaurant')
 //#endregion
 
 //#region  routes setting(設定路由)
 //顯示首頁
 app.get("/", (req, res) => {
-    res.render("index", { restaurants: restaurantList.results })
+    Restaurants.find()
+        .lean()
+        .then(restaurants => res.render('index' , {restaurants}))
+        .catch(error => console.error(error))
 })
 
 //顯示詳細資料
