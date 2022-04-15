@@ -36,9 +36,14 @@ app.get('/search' , (req , res) =>{
   res.render('index' , {keyword:keyword , restaurants:restaurants})
 })
 
-//顯示後臺管理
+//顯示後臺管理頁面
 app.get('/backstage' , (req , res)=>{
   res.render('backstage' , {restaurants:restaurantList.results})
+})
+
+//顯示新增餐廳頁面
+app.get('/backstage/new' , (req , res)=>{
+  res.render('new')
 })
 //#endregion 
 
