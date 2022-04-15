@@ -29,6 +29,11 @@ db.once("open", () => {
 })
 //#endregion -
 
+//#region - method-override Setting
+const methodOverride = require("method-override")
+app.use(methodOverride("_method"))
+//#endregion -
+
 const Restaurants = require("./models/restaurant")
 //#endregion
 
@@ -37,7 +42,7 @@ const Restaurants = require("./models/restaurant")
 app.get("/", (req, res) => {
     Restaurants.find()
         .lean()
-        .sort({_id: 'asc'})
+        .sort({ _id: "asc" })
         .then((restaurants) => res.render("index", { restaurants }))
         .catch((error) => console.error(error))
 })
@@ -51,12 +56,11 @@ app.get("/restaurants/:id", (req, res) => {
         .catch((error) => console.error(error))
 })
 
-
 //* Search 資料取得與渲染
 app.get("/search", (req, res) => {
     const keyword = req.query.keyword //* 從URL中傳來的 keyword引數
     const reg = new RegExp(keyword, "i") //* 不區分大小寫
-    
+
     /** 多條件與模糊查詢指令
      *  多條件查詢: query.$or
      *  模糊查詢: query.$regex
@@ -67,10 +71,10 @@ app.get("/search", (req, res) => {
             if (restaurantResults.length === 0) {
                 Restaurants.find({ category: { $regex: reg } })
                     .lean()
-                    .then((restaurantResults) => res.render("index", {keyword ,  restaurants: restaurantResults }))
+                    .then((restaurantResults) => res.render("index", { keyword, restaurants: restaurantResults }))
                     .catch((error) => console.log(error))
             } else {
-                res.render("index", { keyword , restaurants: restaurantResults })
+                res.render("index", { keyword, restaurants: restaurantResults })
             }
         })
         .catch((error) => console.log(error))
