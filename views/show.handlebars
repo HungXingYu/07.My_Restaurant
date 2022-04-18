@@ -1,22 +1,29 @@
-<h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
+<h1 class="mb-1 restaurant-show-title">{{result.name}}</h1>
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-
+      <p class="mb-1">
+        <span class="text-secondary">
+          <i class="fa-solid fa-calendar-check"></i>
+          上傳日期：
+        </span>
+        {{result.uploadDate}}
+      </p>
+      
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-utensils pr-2"></i>
-          類別：
+          餐廳類別：
         </span>
-        {{restaurant.category}}
+        {{result.category}}
       </p>
 
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-map-marker-alt pr-2"></i>
-          地址：
+          餐廳地址：
         </span>
-        {{restaurant.location}}
+        {{result.location}}
         <a href="https://goo.gl/maps/V9mKwVJ4s5v" class="text-secondary" target="_blank">
           <i class="fas fa-location-arrow pr-2 fa-xs"></i>
         </a>
@@ -25,16 +32,16 @@
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-mobile-alt pr-2"></i>
-          電話：
+          餐廳電話：
         </span>
-        {{restaurant.phone}}
+        {{result.phone}}
       </p>
 
       <p class="mb-5">
-        {{restaurant.description}}
+        {{result.description}}
       </p>
 
-      <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}" style="max-width: 600px;">
+      <img class="rounded mx-auto d-block mb-4 w-100" src="{{result.image}}" alt="{{result.name}}" style="max-width: 600px;">
     </div>
   </div>
 </div>
