@@ -1,25 +1,37 @@
-// *引用 Express 與 Express 路由器
+//#region 引用 Express 與 Express 路由器
 const express = require("express")
 const router = express.Router()
+//#endregion
 
-// *引入 home 模組程式碼
+//#region  引入模組程式碼
+//#region - 引入 home 模組程式碼
 const home = require("./modules/home")
-// *將網址結構符合 / 、 /search、/restaurants/:id 字串的 request 導向 home 模組 
-router.use("/", home)
-router.use("/search", home)
-router.use("/restaurants/:id", home)
+/* 將網址結構符合 home 模組使用的 request 字串導向 home 模組
+ *  /
+ *  /search
+ *  /restaurants/:id
+ */
+router.use("/", home).use("/search", home).use("/restaurants/:id", home)
+//#endregion -
 
-// *引用 backstage 模組
+//#region - 引用 backstage 模組
 const backstage = require("./modules/backstage")
-// * 將網址符合 /backstage 字串的 request 導向 backstage 模組 
-router.use("/backstage", backstage)
+/* 將網址結構符合 backstage 模組使用的 request 字串導向 backstage 模組
+ *  /backstage
+ *  /backstage/search
+ */
+router.use("/backstage", backstage).use("/backstage/search", backstage)
+//#endregion -
 
+//#region - 引用 restaurants 模組
+const restaurants = require("./modules/restaurants")
+/* 將網址結構符合 restaurants 模組使用的 request 字串導向 restaurants 模組
+ *  /backstage/restaurants
+ */
+router.use("/backstage/restaurants", restaurants)
+//#endregion -
+//#endregion
 
-// *引用 restaurants 模組
-const restaurants = require('./modules/restaurants')
-// * 將網址符合 /backstage/restaurants 字串的 request 導向 restaurants 模組
-router.use("/backstage/restaurants" , restaurants)
-
-
-// *匯出路由模組
+//#region 匯出路由模組
 module.exports = router
+//#endregion

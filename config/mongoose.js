@@ -1,4 +1,3 @@
-//#region - MongoDB Setting
 require("dotenv").config()
 const mongoose = require("mongoose")
 mongoose.connect(process.env.MONGODB_URI)
@@ -11,4 +10,3 @@ db.on("error", () => {
 db.once("open", () => {
     console.log("mongodb connected!")
 })
-//#endregion -
