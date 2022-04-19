@@ -7,7 +7,7 @@ const { findAll, findRestaurantByFilter, findById } = require("../../controllers
 
 // *定義首頁路由
 router.get("/", (req, res) => {
-    findAll(Restaurants, "index", req, res)    
+    findAll(Restaurants, "index", req, res)
 })
 
 //* Search 資料取得與渲染

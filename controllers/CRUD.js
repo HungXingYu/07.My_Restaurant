@@ -1,5 +1,5 @@
 const findAll = (Model, pageName, req, res) => {
-    Model.find()
+  Model.find()
         .lean()
         .sort({ _id: "asc" })
         .then((results) => res.render(pageName, { results }))
@@ -31,9 +31,9 @@ const findRestaurantByFilter = (Model, pageName, req, res) => {
 
 const findById = (Model, pageName, req, res) => {
     const id = req.params.id
-    return Model.findById(id)
+    Model.findById(id)
         .lean()
-        .then((result) => res.render(pageName, {result}))
+        .then((result) =>res.render(pageName, {result}))
         .catch((error) => console.error(error))
 }
 

@@ -14,7 +14,7 @@ const home = require("./modules/home")
 router.use("/", home).use("/search", home).use("/restaurants/:id", home)
 //#endregion -
 
-//#region - 引用 backstage 模組
+//#region - 引用 backstage 模組程式碼
 const backstage = require("./modules/backstage")
 /* 將網址結構符合 backstage 模組使用的 request 字串導向 backstage 模組
  *  /backstage
@@ -23,7 +23,7 @@ const backstage = require("./modules/backstage")
 router.use("/backstage", backstage).use("/backstage/search", backstage)
 //#endregion -
 
-//#region - 引用 restaurants 模組
+//#region - 引用 restaurants 模組程式碼
 const restaurants = require("./modules/restaurants")
 /* 將網址結構符合 restaurants 模組使用的 request 字串導向 restaurants 模組
  *  /backstage/restaurants

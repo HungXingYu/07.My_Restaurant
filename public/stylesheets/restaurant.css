@@ -87,7 +87,7 @@ hr {
 
 .restaurant-show-title {
   position: relative;
-  top: -100px;
+  top: -150px;
   color: white;
   text-align: center;
   font-size: 3rem;
@@ -95,7 +95,6 @@ hr {
 }
 
 @media screen and (max-width: 992px) {
-  
   .card img{
     height: 115px;
   }
