@@ -1,5 +1,5 @@
 <!-- search bar -->
-<div class="container search-bar">
+<div class="container search-bar" id="searchBar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
       <form action="/backstage/search">
@@ -56,7 +56,7 @@
       </div> 
       <hr>
       <!-- restaurant list -->
-      <div class="row row-cols-1  row-cols-sm-2 row-cols-lg-3   g-4">
+      <div class="row row-cols-1  row-cols-sm-2 row-cols-lg-3   g-4" id="restaurantList">
         {{#each results}}
         <div class="col">     
           <div class="card ">
