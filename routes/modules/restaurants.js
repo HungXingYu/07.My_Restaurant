@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 // *引用  model
 const Restaurants = require("../../models/restaurant")
-const {findById } = require("../../controllers/CRUD")
+const {findById } = require("../../controllers/CRUDHelper")
 
 //*顯示新增餐廳頁面
 router.get("/new", (req, res) => {
