@@ -31,12 +31,10 @@
         <div class="row mb-3">
             <label for="category" class="col-sm-3 col-form-label star">餐廳類別：</label>
             <div class="col-sm-9">
-                <select class="form-control" id="category" name="category" required="required">
-                    {{#each restaurantCategory}}
-                    <option value="{{this.name}}" {{#if_selected ../newRestaurant.category
-                        this.name}}selected{{/if_selected}}>{{this.name}}</option>
-                    {{/each}}
-                </select>
+                <div class="form-group">
+                    <select  id="category" class="selectpicker form-control" data-live-search="true" data-size="5" title="---餐廳類別---">                        
+                    </select>
+                </div>
             </div>
         </div>
         <div class="row mb-3">
@@ -88,3 +86,4 @@
     </div>
   </div>
 </div>
+
