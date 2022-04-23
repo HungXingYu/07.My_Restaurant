@@ -7,26 +7,30 @@ const findAll = (Model, pageName, req, res) => {
 }
 
 const findRestaurantByFilter = (Model, pageName, req, res) => {
-    const keyword = req.query.keyword //* 從URL中傳來的 keyword引數
+    const keyword = req.query.keyword.trim()//* 從URL中傳來的 keyword引數
     const reg = new RegExp(keyword, "i") //* 不區分大小寫
 
-    /** 多條件與模糊查詢指令
-     *  多條件查詢: query.$or
-     *  模糊查詢: query.$regex
-     */
-    Model.find({ $or: [{ name: { $regex: reg } }, { name_en: { $regex: reg } }] })
-        .lean()
-        .then((results) => {
-            if (results.length === 0) {
-                Model.find({ category: { $regex: reg } })
-                    .lean()
-                    .then((results) => res.render(pageName, { keyword, results }))
-                    .catch((error) => console.log(error))
-            } else {
-                res.render(pageName, { keyword, results })
-            }
-        })
-        .catch((error) => console.log(error))
+    if (keyword.length === 0) {
+        res.render(pageName, { keyword: "" })
+    } else {
+        /** 多條件與模糊查詢指令
+         *  多條件查詢: query.$or
+         *  模糊查詢: query.$regex
+         */
+        Model.find({ $or: [{ name: { $regex: reg } }, { name_en: { $regex: reg } }] })
+            .lean()
+            .then((results) => {
+                if (results.length === 0) {
+                    Model.find({ category: { $regex: reg } })
+                        .lean()
+                        .then((results) => res.render(pageName, { keyword, results }))
+                        .catch((error) => console.log(error))
+                } else {
+                    res.render(pageName, { keyword, results })
+                }
+            })
+            .catch((error) => console.log(error))
+    }    
 }
 
 const findById = (Model, pageName, req, res) => {
