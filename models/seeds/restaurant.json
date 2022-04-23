@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Sababa 沙巴巴中東美食",
       "name_en": "Sababa Pita Bar",
-      "category": "中東料理",
+      "category": "中東",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg",
       "location": "台北市羅斯福路三段 283 巷 17 號",
       "phone": "02 2363 8009",
@@ -17,7 +17,7 @@
       "id": 2,
       "name": "梅子鰻蒲燒專賣店",
       "name_en": "Umeko Japanese Unagi House",
-      "category": "日本料理",
+      "category": "日式",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5628/02.jpg",
       "location": "台北市中山區林森北路 107 巷 8 號",
       "phone": " 02 2521 2813",
@@ -30,7 +30,7 @@
       "id": 3,
       "name": "ZIGA ZIGA",
       "name_en": "Ziga Zaga",
-      "category": "義式餐廳",
+      "category": "義式",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5629/03.jpg",
       "location": "台北市信義區松壽路 2 號",
       "phone": "02 2720 1230",
@@ -56,7 +56,7 @@
       "id": 5,
       "name": "Gusto Pizza",
       "name_en": "Gusto Pizza",
-      "category": "義式餐廳",
+      "category": "義式",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5631/05.jpg",
       "location": "北市中正區連雲街 74 號",
       "phone": "02 2358 7001",
@@ -95,7 +95,7 @@
       "id": 8,
       "name": "布娜飛比利時啤酒餐廳",
       "name_en": "Bravo Beer",
-      "category": "義式餐廳",
+      "category": "義式",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5634/08.jpg",
       "location": "台北市松山區市民大道四段 185 號",
       "phone": "02 2570 1255",
@@ -103,6 +103,26 @@
       "rating": 4.7,
       "description": "我們希望帶給您的，不只是啤酒，有美食，還有一份對生活的熱情。 義大利語「Bravo」的原意─「喝采」、「讚揚」， 我想著如果有一個大家都能輕鬆品嚐美酒、享受美食的地方，那就真的是太棒了！ 因為這個念頭，加上一股對比利時啤酒的熱情， 於是「Bravo Beer布娜飛比利時啤酒餐廳」在2006年誕生了...",
       "uploadDate": "2022-04-15"
+    }
+  ],
+  "category":[
+    {
+      "name":"義式"
+    },
+    {
+      "name": "美式"
+    },
+    {
+      "name": "日式"
+    },
+    {
+      "name": "咖啡"
+    },
+    {
+      "name": "酒吧"
+    },
+    {
+      "name": "中東"
     }
   ]
 }

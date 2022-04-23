@@ -2,7 +2,7 @@
 const express = require("express")
 const router = express.Router()
 // *引用  model
-const Restaurants = require("../../models/restaurant")
+const {Restaurants} = require("../../models/restaurant")
 const { findAll, findRestaurantByFilter, findById } = require("../../controllers/CRUDHelper")
 
 // *定義首頁路由

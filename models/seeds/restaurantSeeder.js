@@ -1,8 +1,8 @@
 const restaurantJson = require("./restaurant.json")
-const Restaurants = require("../restaurant")
+const { Restaurants, RestaurantCategory } = require("../restaurant")
 const db = require("../../config/mongoose")
 
-db.once("open", () => {
+db.once('open', () => {
     restaurantJson.results.forEach((restaurant) => {
         Restaurants.create({
             name: restaurant.name,
@@ -18,4 +18,11 @@ db.once("open", () => {
         })
     })
     console.log("Restaurants collection done")
+
+    restaurantJson.category.forEach(category =>{
+        RestaurantCategory.create({
+            name:category.name
+        })
+    })
+    console.log("RestaurantCategory collection done")
 })
