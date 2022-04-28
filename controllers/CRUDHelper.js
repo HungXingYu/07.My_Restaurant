@@ -47,6 +47,13 @@ const createOne = (Model ,uploadData ,  pageName , req , res)=>{
         .catch((error) => console.log(error))
 }
 
+const findByIdAndUpdate = (Model , updateData , path , req , res)=>{
+    const id = req.params.id
+    Model.findByIdAndUpdate(id , updateData)
+        .then(res.redirect(path))
+        .catch(error=>console.log(error))
+}
+
 const returnFindAll = (Model) => {
     return Model.find()
         .lean()
@@ -55,12 +62,19 @@ const returnFindAll = (Model) => {
         .catch((error) => console.error(error))
 }
 
-
 const returnFindOne=(Model , filters)=>{
     return Model.findOne(filters)
         .lean()
         .then((result)=>{return result })        
         .catch(error=>console.log(error))
+}
+
+const returnFindById = (Model , req ) =>{
+    const id = req.params.id
+    return Model.findById(id)
+        .lean()
+        .then(result => {return result})
+        .catch(error => console.log(error))
 }
 
 const returnCreateOne = (Model ,uploadData)=>{
@@ -73,8 +87,10 @@ const returnCreateOne = (Model ,uploadData)=>{
 module.exports = { findAll, 
     findRestaurantByFilter, 
     findById,
-    createOne, 
+    createOne,
+    findByIdAndUpdate,
     returnFindAll,
     returnFindOne,
+    returnFindById,
     returnCreateOne,
 }

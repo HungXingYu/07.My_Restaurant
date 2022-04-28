@@ -30,35 +30,28 @@ const validationRules = () => {
   ]
 }
 
-const newRestaurantValidate = (req,res,next)=>{
+const restaurantValidate = (req,res,next)=>{
     const errors = validationResult(req)
+    //*自行在req物件新增definedErrorMsg屬性
+    req.definedErrorMsg = {}
 
     //*無錯誤訊息，回傳next()使router繼續往下執行
     if (errors.isEmpty()) {
         return next()
     }
 
-    //*有錯誤訊息，執行非同步函式keepData()保留輸入資料及渲染錯誤訊息
-    async function keepData() {
-        try{
-          const inputData = req.body
-          //透過 await 暫停 Promise : returnFindAll，“等待” resolve 結果(在此為mongoose執行.then()結果)回傳後，在賦值至 category 。
-          const category = await returnFindAll(RestaurantCategory)
-          const extractedErrors = {}
-          errors.array({ onlyFirstError: true }).map((error) => {extractedErrors[error.param] = error.msg})
+    //*有錯誤訊息，req.definedErrorMsg賦值，再next()使router繼續往下執行
+    const extractedErrors = {}
 
-          return res.render("new", { errors: extractedErrors, results: category, inputData })
-        }
-        catch(err){
-          console.log('catch' , err)
-        }
-        
-    }
-    keepData()
+    errors.array({ onlyFirstError: true }).map((error) => {
+        extractedErrors[error.param] = error.msg
+    })
+    req.definedErrorMsg = extractedErrors
+    next()
 }
 
 
 module.exports = {
     validationRules,
-    newRestaurantValidate,
+    restaurantValidate,
 }
