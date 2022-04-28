@@ -61,9 +61,14 @@ hr {
   border-radius: 50%;
 }
 
+
 .form-control:focus {
   box-shadow: none;
   border-color: #ced4da;
+}
+
+::-webkit-input-placeholder {
+  font-size: 15px !important;
 }
 
 .card {

@@ -1,28 +1,32 @@
 //#region  require packages used in the project(該專案需使用的Packages)
-//#region - express setting
+//#region - setting express 
 const { request } = require("express")
 const express = require("express")
 const app = express()
 const port = 3000
 //#endregion -
 
-//#region - express-handlebars Setting
+//#region - setting express-handlebars 
 const exphbs = require("express-handlebars")
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
 //#endregion -
 
-//#region - method-override Setting
+//#region - setting body-parser
+app.use(express.urlencoded({ extended: true }))
+//#endregion -
+
+//#region - setting method-override
 const methodOverride = require("method-override")
 app.use(methodOverride("_method"))
 //#endregion -
 
-//#region - routes Setting
+//#region - setting routes 
 const routes = require("./routes")
 app.use(routes)
 //#endregion -
 
-//#region - database Setting
+//#region - setting database
 require("./config/mongoose")
 //#endregion -
 

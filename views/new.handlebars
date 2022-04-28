@@ -1,89 +1,86 @@
-<!--顯示錯誤訊息的程式碼-->
-{{#each errorMessages}}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  {{this.msg}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-{{/each}}
-
 <!-- add form-->
 <div class="container search-bar mb-5">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
-      <form method="POST" action="/backstage/new">
+      <form method="POST" action="/backstage/restaurants" id="newRestaurantForm">
         <h4 class="mb-2">新增餐廳</h4>
-        <div class="row mb-3">
-          <label for="restaurantName" class="col-sm-3 col-form-label">餐廳中文名：</label>
+        <div class="row g-0 mb-3">
+          <label for="name" class="col-sm-3 col-form-label">餐廳中文名：</label>
           <div class="col-sm-9">
-            <input type="text" name="name" id="restaurantName" class="form-control" placeholder="輸入餐廳中文名"
-                value="{{newRestaurant.name}}" required="required">
+            <input type="text" name="name" id="name" class="form-control bg-light" placeholder="輸入餐廳中文名"
+                value="{{inputData.name}}" data-error ="{{errors.name}}">
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="name_en" class="col-sm-3 col-form-label star">餐廳英文名：</label>
             <div class="col-sm-9">
-              <input type="text" name="name_en" id="name_en" class="form-control" placeholder="輸入餐廳英文名"
-                  value="{{newRestaurant.name_en}}" required="required">
+              <input type="text" name="name_en" id="name_en" class="form-control bg-light" placeholder="輸入餐廳英文名"
+                  value="{{inputData.name_en}}" data-error ="{{errors.name_en}}">
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">            
             <label for="category" class="col-sm-3 col-form-label star">餐廳類別：</label>
-            <div class="col-sm-9">
+            <div class="col-sm-8">                  
                 <div class="form-group">
-                    <select  id="category" class="selectpicker form-control" data-live-search="true" data-size="5" title="---餐廳類別---">                        
+                    <select name="category"  id="category" class="selectpicker form-control" data-live-search="true" data-size="3" title="選擇餐廳類別，如搜尋不到請點選+自行建立" data-value="{{inputData.category}}" data-error ="{{errors.category}}">                        
+                        {{#each results}}
+                        <option value="{{this.name}}">{{this.name}}</option>
+                        {{/each}}
                     </select>
-                </div>
+                </div>                              
             </div>
+            <div class="col-sm-1  d-grid gap-2">
+                <button type="button" class="btn btn-major" id="addCategory"><i class="fa-solid fa-plus"></i></button>                
+            </div>            
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="image" class="col-sm-3 col-form-label star">餐廳照片：</label>
             <div class="col-sm-9">
-                <input type="text" name="image" id="image" class="form-control" placeholder="輸入餐廳網路照片網址"
-                    value="{{newRestaurant.image}}" required="required">
+                <input type="text" name="image" id="image" class="form-control bg-light" placeholder="輸入餐廳網路照片網址"
+                    value="{{inputData.image}}" data-error ="{{errors.image}}">
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="location" class="col-sm-3 col-form-label star">餐廳地址：</label>
             <div class="col-sm-9">
-                <input type="text" name="location" id="location" class="form-control" placeholder="輸入餐廳地址"
-                    value="{{newRestaurant.location}}" required="required">
+                <input type="text" name="location" id="location" class="form-control bg-light" placeholder="輸入餐廳地址"
+                    value="{{inputData.location}}" data-error ="{{errors.location}}">
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="phone" class="col-sm-3 col-form-label star">餐廳電話：</label>
             <div class="col-sm-9">
-                <input type="text" name="phone" id="phone" class="form-control" placeholder="輸入餐廳電話"
-                    value="{{newRestaurant.phone}}" required="required">
+                <input type="text" name="phone" id="phone" class="form-control bg-light" placeholder="輸入餐廳電話"
+                    value="{{inputData.phone}}" data-error ="{{errors.phone}}">
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="google_map" class="col-sm-3 col-form-label text-nowrap star">餐廳Google Map：</label>
             <div class="col-sm-9">
-                <input type="text" name="google_map" id="google_map" class="form-control"
-                    value="{{newRestaurant.google_map}}" placeholder="輸入餐廳Google Map連結" required="required">
+                <input type="text" name="google_map" id="google_map" class="form-control bg-light"
+                    value="{{inputData.google_map}}" placeholder="輸入餐廳Google Map連結" data-error ="{{errors.google_map}}">
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="rating" class="col-sm-3 col-form-label star">餐廳評分：</label>
             <div class="col-sm-9">
-                <input type="text" name="rating" id="rating" class="form-control" placeholder="輸入餐廳評分"
-                    value="{{newRestaurant.rating}}" required="required">
+                <input type="text" name="rating" id="rating" class="form-control bg-light" placeholder="輸入餐廳評分"
+                    value="{{inputData.rating}}" data-error ="{{errors.rating}}">
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row g-0 mb-3">
             <label for="description" class="col-sm-3 col-form-label star">餐廳簡介：</label>
             <div class="col-sm-9">
-                <textarea name="description" class="form-control " id="description" rows="3"
-                    value="{{newRestaurant.description}}" placeholder="輸入餐廳簡介" required="required"></textarea>
+                <textarea name="description" id="description" class="form-control bg-light" style="resize:none"  rows="3" 
+                    value="{{inputData.description}}" placeholder="輸入餐廳簡介" data-error ="{{errors.description}}">{{inputData.description}}</textarea>
             </div>
         </div>
         <div class="d-grid gap-2">
-          <button class="btn btn-major" type="submit">新增</button>
+            <input type="button"  id="uploadBtn" class="btn btn-major" value="新增" data-error="{{errors.upload}}">
         </div>
       </form>
     </div>
   </div>
 </div>
+
 

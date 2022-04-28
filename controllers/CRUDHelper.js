@@ -41,6 +41,40 @@ const findById = (Model, pageName, req, res) => {
         .catch((error) => console.error(error))
 }
 
+const createOne = (Model ,uploadData ,  pageName , req , res)=>{
+    Model.create(uploadData)
+        .then(() => res.redirect(pageName))
+        .catch((error) => console.log(error))
+}
+
+const returnFindAll = (Model) => {
+    return Model.find()
+        .lean()
+        .sort({ _id: "asc" })
+        .then((results) => {return results})
+        .catch((error) => console.error(error))
+}
+
+
+const returnFindOne=(Model , filters)=>{
+    return Model.findOne(filters)
+        .lean()
+        .then((result)=>{return result })        
+        .catch(error=>console.log(error))
+}
+
+const returnCreateOne = (Model ,uploadData)=>{
+    return Model.create(uploadData)
+        .then(() => {return true})
+        .catch(error=>{return error})
+}
+
+
 module.exports = { findAll, 
-  findRestaurantByFilter,
-  findById }
+    findRestaurantByFilter, 
+    findById,
+    createOne, 
+    returnFindAll,
+    returnFindOne,
+    returnCreateOne,
+}
