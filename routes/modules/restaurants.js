@@ -3,15 +3,23 @@ const express = require("express")
 const router = express.Router()
 // *引用  model
 const { Restaurants, RestaurantCategory } = require("../../models/restaurant")
-const { findById, findAll, createOne, findByIdAndUpdate, returnFindAll, returnFindOne, returnFindById, returnCreateOne } = require("../../controllers/CRUDHelper")
+const { findById, 
+    findAll, 
+    createOne, 
+    findByIdAndUpdate, 
+    returnFindAll, 
+    returnFindOne, 
+    returnFindById, 
+    returnCreateOne, 
+    returnDeleteById } = require("../../controllers/CRUDHelper")
 const { validationRules, restaurantValidate } = require("../../controllers/validatorHelper")
 //*引用其他
 const datetime = require('node-datetime')
 
 
-async function keepData(pageName ,req ,  res) {
+async function keepFormData(pageName ,req ,  res) {
     const inputData = req.body
-    //透過 await 暫停 Promise : returnFindAll，“等待” resolve 結果(在此為mongoose執行.then()結果)回傳後，在賦值至 category 。
+    //透過 await 暫停 Promise : returnFindAll，“等待” resolve 結果(在此為mongoose執行.then()結果回傳後，在賦值至 category 。
     const category = await returnFindAll(RestaurantCategory)
     const definedErrorMsg = req.definedErrorMsg
 
@@ -29,7 +37,7 @@ router.post("/", validationRules(), restaurantValidate, (req, res) => {
     const definedErrorMsg = req.definedErrorMsg
 
     if(Object.keys(definedErrorMsg).length !== 0){       
-        keepData("new" ,req ,  res)
+        keepFormData("new", req, res)
     }else{
         const uploadDate = datetime.create()
         const formatDate = uploadDate.format("Y-m-d")
@@ -98,7 +106,13 @@ router.get("/category" , (req, res)=>{
 
 //*顯示詳細資料(可編輯、刪除版本)頁面
 router.get("/:id", (req, res) => {
-    findById(Restaurants, "showEdit", req, res)
+    async function getData(){
+        const restaurantResult = await returnFindById(Restaurants , req )
+        const scripts = [{ script: "/javascripts/deleteHelper.js" }]
+
+        res.render("showEdit" , {result:restaurantResult , scripts})
+    }
+    getData()
 })
 
 //*顯示修改一筆餐廳頁面
@@ -117,7 +131,7 @@ router.put("/:id" ,validationRules() , restaurantValidate, (req , res) =>{
     const definedErrorMsg = req.definedErrorMsg
 
     if (Object.keys(definedErrorMsg).length !== 0) {
-        keepData("edit" ,req , res)
+        keepFormData("edit", req, res)
     }else{
         const uploadDate = datetime.create()
         const formatDate = uploadDate.format("Y-m-d")
@@ -129,6 +143,44 @@ router.put("/:id" ,validationRules() , restaurantValidate, (req , res) =>{
     }
 })
 
+//*批次刪除餐廳資料
+router.delete("/batch" ,(req , res)=>{
+    const idCount = req.body.count
+    const idArr = req.body.id.split(',')
+    let response = { msgTitle: "", msgText: "" }
+
+    async function deleteData(){
+        const deleteDataResult = await returnDeleteById(Restaurants , idArr)
+
+        if(deleteDataResult){
+            response.msgTitle = "刪除成功"
+            response.msgText = `您勾選的${idCount}筆餐廳資料已刪除成功！`
+        }else{
+            response.msgTitle = "刪除失敗"
+            response.msgText = deleteDataResult
+        }
+        res.json(response)
+    }
+    deleteData()
+})
+
+//*刪除一筆餐廳資料
+router.delete("/:id" , (req , res)=>{
+    async function deleteData(){
+        const deleteDataResult = await returnDeleteById(Restaurants , [req.body.id])
+        let response = { msgTitle: "", msgText: "" }
+        
+        if (deleteDataResult) {
+            response.msgTitle = "刪除成功"
+            response.msgText = `該餐廳資料已刪除成功！`
+        } else {
+            response.msgTitle = "刪除失敗"
+            response.msgText = deleteDataResult
+        }
+        res.json(response)
+    }    
+    deleteData()
+})
 
 // *匯出路由模組
 module.exports = router

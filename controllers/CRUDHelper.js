@@ -83,6 +83,11 @@ const returnCreateOne = (Model ,uploadData)=>{
         .catch(error=>{return error})
 }
 
+const returnDeleteById = (Model , idArr) =>{
+    return Model.deleteMany({_id:{$in:idArr}})
+        .then(()=>{return true})
+        .catch((error)=>{return error})
+}
 
 module.exports = { findAll, 
     findRestaurantByFilter, 
@@ -93,4 +98,5 @@ module.exports = { findAll,
     returnFindOne,
     returnFindById,
     returnCreateOne,
+    returnDeleteById,
 }
