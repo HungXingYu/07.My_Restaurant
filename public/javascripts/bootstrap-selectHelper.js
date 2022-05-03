@@ -1,5 +1,6 @@
-const dropdownValue = document.querySelector('.selectpicker').dataset.value
+const dropdown = document.querySelector('.selectpicker')
 
-if(dropdownValue !== ""){
+if(dropdown){
+    const dropdownValue = dropdown.dataset.value
     $(".selectpicker").selectpicker("val", dropdownValue)
 }

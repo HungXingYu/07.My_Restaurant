@@ -41,7 +41,7 @@ function callYesNoMsg(msgTitle) {
 
 
 //#region - 搜尋餐廳查無資料
-if (searchBar !== null && restaurantList === null) {
+if (searchBar && !restaurantList) {
     let msgTitle = "查無資料"
     let msgHtml = "<b>您輸入的關鍵字查無資料，請重新輸入關鍵字再查詢</b>"
     callErrorMsg(msgTitle, msgHtml).then((result) => {
@@ -63,13 +63,13 @@ function formSubmit(CRUDBtn,msgTitle){
     })
 }
 
-if(uploadBtn !== null){
+if(uploadBtn){
     uploadBtn.addEventListener("click", (event) => {
         formSubmit(uploadBtn , "是否確定上傳?")
     })
 }
 
-if(modifyBtn !== null){
+if(modifyBtn){
     modifyBtn.addEventListener("click" , (event)=>{
         formSubmit(modifyBtn, "是否確定修改?")
     })
@@ -101,7 +101,7 @@ if (dataError.length !== 0) {
 //#endregion -
 
 //#region - 建立新餐廳類別
-if(addCategoryBtn !== null){
+if(addCategoryBtn){
     addCategoryBtn.addEventListener("click", (event) => {
         Swal.fire({
             title: "建立新的餐廳類別",
@@ -171,3 +171,5 @@ if(addCategoryBtn !== null){
     })
 }
 //#endregion -
+
+
