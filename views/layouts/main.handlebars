@@ -33,12 +33,12 @@
           <!-- 選單項目&漢堡式折疊選單 -->
           <!-- .collapse .navbar-collapse 用於外層中斷點群組和隱藏導覽列內容 -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">                
-                <a class="nav-link" aria-current="page" href="/">首頁</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills">
+              <li class="nav-item li-pill">                
+                <a id="navIndex" class="nav-link" aria-current="page" href="/">首頁</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/backstage">後臺管理</a>               
+              <li class="nav-item li-pill">
+                <a id="navBackstage" class="nav-link" href="/backstage">後臺管理</a>               
               </li>
             </ul>            
           </div>
@@ -57,8 +57,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/javascripts/bootstrap-selectHelper.js"></script>   
+    <script src="/javascripts/bootstrap-selectHelper.js"></script>
     <script src="/javascripts/modalHelper.js"></script>
+    <script src="/javascripts/navHelper.js"></script>
     {{#each scripts}}
     <script src="{{script}}"></script>
     {{/each}}

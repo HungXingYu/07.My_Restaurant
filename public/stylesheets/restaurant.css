@@ -10,6 +10,18 @@ header {
   color: #226089;
 }
 
+/*Nav not active */
+#navbarSupportedContent .nav-pills .li-pill .nav-link:not(.active) {
+  background-color: #FFFEEF;
+}
+
+/*Nav active*/
+#navbarSupportedContent .nav-pills .li-pill .nav-link {
+  background-color: #fce2cf;
+  color: black;
+}
+
+
 .banner {
   position: relative;
   z-index: -1;
