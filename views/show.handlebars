@@ -1,47 +1,30 @@
 <h1 class="mb-1 restaurant-show-title">{{result.name}}</h1>
 <h2 class="mb-1 restaurant-show-title">{{result.name_en}}</h2>
 <div class="container">
-  <div class="row">
-    <div class="col-12 col-md-6 mx-auto">
-      <p class="mb-1">
-        <span class="text-secondary">
-          <i class="fa-solid fa-calendar-check"></i>
-          上傳日期：
-        </span>
-        {{result.uploadDate}}
-      </p>
-      
-      <p class="mb-1">
-        <span class="text-secondary">
-          <i class="fas fa-utensils pr-2"></i>
-          餐廳類別：
-        </span>
-        {{result.category}}
-      </p>
-
-      <p class="mb-1">
-        <span class="text-secondary">
-          <i class="fas fa-map-marker-alt pr-2"></i>
-          餐廳地址：
-        </span>
-        {{result.location}}
-        <a href="https://goo.gl/maps/V9mKwVJ4s5v" class="text-secondary" target="_blank">
-          <i class="fas fa-location-arrow pr-2 fa-xs"></i>
-        </a>
-      </p>
-
-      <p class="mb-1">
-        <span class="text-secondary">
-          <i class="fas fa-mobile-alt pr-2"></i>
-          餐廳電話：
-        </span>
-        {{result.phone}}
-      </p>
-
-      <p class="mb-5">
-        {{result.description}}
-      </p>
-
+  <div class="row justify-content-center">
+    <div class="col-auto col-md-6">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <i class="fa-solid fa-calendar-check"></i> 更新日期：{{result.uploadDate}}
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-utensils pr-2"></i> 餐廳類別：{{result.category}}
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-map-marker-alt pr-2"></i> 餐廳地址：{{result.location}}
+          <a href="{{result.google_map}}" class="text-secondary" target="_blank">
+            <i class="fas fa-location-arrow pr-2 fa-xs"></i>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-mobile-alt pr-2"></i> 餐廳電話：{{result.phone}}               
+        </li>
+        <li class="list-group-item">
+          餐廳描述：{{result.description}}
+        </li>
+      </ul>            
+    </div>
+    <div class="col-auto col-md-6">
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{result.image}}" alt="{{result.name}}" style="max-width: 600px;">
     </div>
   </div>

@@ -99,16 +99,20 @@ hr {
 
 .restaurant-category {
   color: #666666;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .restaurant-show-title {
   position: relative;
-  top: -150px;
+  top: -60px;
   color: white;
   text-align: center;
   font-size: 3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.list-group{
+  font-size: 1.3rem;
 }
 
 @media screen and (max-width: 992px) {

@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<!-- restaurant list -->
+
 <div class="container mt-5">
   <div class="row justify-content-between">
     <!--版面切換-->
@@ -25,8 +25,8 @@
       <div class="col-auto">
         <div class="form-group">
           <select class="selectpicker form-control" data-style="btn-dark" id="sort" data-value="{{sort}}" >
-            <option value="uploadDate">上傳日期(早>晚)</option>
-            <option value="-uploadDate">上傳日期(晚>早)</option>
+            <option value="uploadDate">更新日期(早>晚)</option>
+            <option value="-uploadDate">更新日期(晚>早)</option>
             <option value="name_en">餐廳名稱(A>Z)</option>
             <option value="-name_en">餐廳名稱(Z>A)</option>              
             <option value="rating">餐廳評分(低>高)</option>
@@ -39,7 +39,7 @@
   </div>
   
   <hr>
-
+  <!-- restaurant list -->
   <div class="row row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4"  id="restaurantList">
     {{#each results}}
     <div class="col">     
@@ -47,16 +47,15 @@
         <div class="card h-100">
           <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
           <div class="card-body p-3">
-            <h6 class="card-title mb-1">{{this.name}}</h6>
+            <h5 class="card-title mb-1">{{this.name}}</h5>
 
             <div class="restaurant-category mb-1">
-              <i class="fas fa-utensils pr-2"></i> {{this.category}}
+              <i class="fas fa-utensils pr-2"></i> {{this.category}}/<i class="fas fa-star fa-xs"></i> {{this.rating}}
             </div>
-
-            <span class="badge badge-pill badge-danger font-weight-normal">
-              {{this.rating}}
-              <i class="fas fa-star fa-xs"></i>
-            </span>
+            
+            <div>              
+              <i class="fa-solid fa-calendar-check"></i> {{this.uploadDate}} update
+            </div>
 
           </div>
         </div>
