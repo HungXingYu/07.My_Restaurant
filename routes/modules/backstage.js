@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 // *引用  model
 const {Restaurants} = require("../../models/restaurant")
-const {findRestaurantByFilter , returnFindAll} = require("../../controllers/CRUDHelper")
+const { findAllBySort,findRestaurantByFilter, returnFindAll } = require("../../controllers/CRUDHelper")
 
 //*顯示後臺管理頁面
 router.get("/", (req, res) => {
@@ -11,15 +11,22 @@ router.get("/", (req, res) => {
         const restaurantResults = await returnFindAll(Restaurants)
         const scripts = [{ script: '/javascripts/deleteHelper.js' }]
 
-        res.render("backstage", { results: restaurantResults, scripts})
+        res.render("backstage", { sort: "uploadDate", results: restaurantResults, scripts })
     }
     getData()
 })
 
-//* Search 資料取得與渲染
+//*Search 資料取得與渲染
 router.get("/search", (req, res) => {
     findRestaurantByFilter(Restaurants, "backstage", req, res)
 })
+
+//*排序
+router.get("/sort" , (req , res) =>{
+    findAllBySort(Restaurants , "backstage" , req , res)
+})
+
+
 
 // *匯出路由模組
 module.exports = router

@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 // *引用  model
 const {Restaurants} = require("../../models/restaurant")
-const { findAll, findRestaurantByFilter, findById } = require("../../controllers/CRUDHelper")
+const { findAll,findAllBySort, findRestaurantByFilter, findById } = require("../../controllers/CRUDHelper")
 
 // *定義首頁路由
 router.get("/", (req, res) => {
@@ -17,7 +17,14 @@ router.get("/search", (req, res) => {
 
 //*顯示詳細資料
 router.get("/restaurants/:id", (req, res) => {
+    console.log(req)
     findById(Restaurants , "show" , req , res)
+    
+})
+
+//*排序
+router.get("/sort" , (req , res) =>{
+    findAllBySort(Restaurants , "index" , req , res)
 })
 
 // *匯出路由模組

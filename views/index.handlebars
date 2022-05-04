@@ -16,8 +16,31 @@
 </div>
 
 <!-- restaurant list -->
-<div class="container mt-5" id="restaurantList">
-  <div class="row row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+<div class="container mt-5">
+  <div class="row justify-content-between">
+    <!--版面切換-->
+    <div class="col-auto">
+    </div>
+    <!--排序-->
+      <div class="col-auto">
+        <div class="form-group">
+          <select class="selectpicker form-control" data-style="btn-dark" id="sort" data-value="{{sort}}" >
+            <option value="uploadDate">上傳日期(早>晚)</option>
+            <option value="-uploadDate">上傳日期(晚>早)</option>
+            <option value="name_en">餐廳名稱(A>Z)</option>
+            <option value="-name_en">餐廳名稱(Z>A)</option>              
+            <option value="rating">餐廳評分(低>高)</option>
+            <option value="-rating">餐廳評分(高>低)</option>
+            <option value="category">餐廳類別</option>
+            <option value="location">餐廳地區</option>
+          </select>
+        </div>
+      </div>
+  </div>
+  
+  <hr>
+
+  <div class="row row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4"  id="restaurantList">
     {{#each results}}
     <div class="col">     
       <a href="/restaurants/{{this._id}}" class="text-secondary">

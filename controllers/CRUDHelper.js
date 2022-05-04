@@ -1,8 +1,17 @@
 const findAll = (Model, pageName, req, res) => {
   Model.find()
         .lean()
-        .sort({ _id: "asc" })
-        .then((results) => res.render(pageName, { results }))
+        .sort('uploadDate')
+        .then((results) => res.render(pageName, { results , sort:"uploadDate"}))
+        .catch((error) => console.error(error))
+}
+
+const findAllBySort = (Model , pageName , req , res) =>{
+    const sortField = req.query.name
+    Model.find()
+        .lean()
+        .sort(sortField)
+        .then((results) => res.render(pageName, { results , sort: sortField}))
         .catch((error) => console.error(error))
 }
 
@@ -57,7 +66,7 @@ const findByIdAndUpdate = (Model , updateData , path , req , res)=>{
 const returnFindAll = (Model) => {
     return Model.find()
         .lean()
-        .sort({ _id: "asc" })
+        .sort({uploadDate: "asc" })
         .then((results) => {return results})
         .catch((error) => console.error(error))
 }
@@ -89,7 +98,8 @@ const returnDeleteById = (Model , idArr) =>{
         .catch((error)=>{return error})
 }
 
-module.exports = { findAll, 
+module.exports = { findAll,
+    findAllBySort,
     findRestaurantByFilter, 
     findById,
     createOne,
