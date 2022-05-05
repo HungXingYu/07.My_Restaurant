@@ -51,7 +51,7 @@ if (sort) {
             onPageClick: function (event, pageNum) {
                 const sortField = sort.dataset.value
                 let newHref = setHref()
-                let pagePath = oldHref.indexOf("search") < 0 ? `/sort?sortType=${sortField}&page=${pageNum}` : `&sortType=${sortField}&page=${pageNum}`                
+                let pagePath = oldHref.indexOf("search") < 0 ? `/sort?sortType=${sortField}&page=${pageNum}` : `&sortType=${sortField}&page=${pageNum}`
                 newHref += pagePath
 
                 if (pageNum > currentPage || pageNum < currentPage) {
