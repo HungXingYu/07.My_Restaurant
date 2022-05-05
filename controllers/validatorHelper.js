@@ -1,6 +1,4 @@
 const { body, validationResult } = require("express-validator")
-const { RestaurantCategory } = require("../models/restaurant")
-const { returnFindAll } = require("./CRUDHelper")
 
 const validationRules = () => {
   return [

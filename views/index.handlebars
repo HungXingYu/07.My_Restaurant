@@ -5,7 +5,7 @@
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
-          <input type="text" name="keyword"  value="{{keyword}}" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." aria-describedby="search-button" required>
+          <input type="text" id="keyword" name="keyword"  value="{{keyword}}" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." aria-describedby="search-button" required>
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
@@ -14,7 +14,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="container mt-5">
   <div class="row justify-content-between">
@@ -40,7 +39,7 @@
   
   <hr>
   <!-- restaurant list -->
-  <div class="row row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4"  id="restaurantList">
+  <div class="row row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"  id="restaurantList">
     {{#each results}}
     <div class="col">     
       <a href="/restaurants/{{this._id}}" class="text-secondary">
@@ -62,6 +61,11 @@
       </a>      
     </div>
     {{/each}}
-  </div>  
+  </div>
+
+  <!-- --分頁paginator-- -->
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center  mt-5" id="pagination" data-currentPage="{{pageNum}}"></ul>
+  </nav>
 </div>
 

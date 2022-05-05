@@ -7,11 +7,14 @@ const navCategory = window.location.pathname.split('/')[1]
 
 navItem.removeClass("active")
 switch (navCategory) {
-    case "":
-        navIndex.addClass("active")
-        break
     case "backstage":
         navBackstage.addClass("active")
+        break
+    case "restaurants":
+        navItem.removeClass("active")
+        break
+    default :
+        navIndex.addClass("active")
         break
 }
 

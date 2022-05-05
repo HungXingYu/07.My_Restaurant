@@ -3,8 +3,7 @@ const express = require("express")
 const router = express.Router()
 // *引用  model
 const { Restaurants, RestaurantCategory } = require("../../models/restaurant")
-const { findById, 
-    findAll, 
+const { findAll, 
     createOne, 
     findByIdAndUpdate, 
     returnFindAll, 

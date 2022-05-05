@@ -3,30 +3,45 @@ const express = require("express")
 const router = express.Router()
 // *引用  model
 const {Restaurants} = require("../../models/restaurant")
-const { findAllBySort,findRestaurantByFilter, returnFindAll } = require("../../controllers/CRUDHelper")
+const { findLimitBySort, findRestaurantByFilter } = require("../../controllers/CRUDHelper")
+
+//*公用變數
+let pageSetting = {
+    pageName: "backstage",
+    skipDataTotal: 0,
+    limit: 6,
+    sortField: "",
+    currentPage: "",
+    scripts: [{ script: "/javascripts/deleteHelper.js" }]
+}
+
 
 //*顯示後臺管理頁面
 router.get("/", (req, res) => {
-    async function getData(){
-        const restaurantResults = await returnFindAll(Restaurants)
-        const scripts = [{ script: '/javascripts/deleteHelper.js' }]
-
-        res.render("backstage", { sort: "uploadDate", results: restaurantResults, scripts })
-    }
-    getData()
+    pageSetting.sortField = "uploadDate"
+    pageSetting.skipDataTotal = 0
+    pageSetting.currentPage = "1"
+    
+    findLimitBySort(Restaurants, pageSetting, req, res)
 })
 
 //*Search 資料取得與渲染
 router.get("/search", (req, res) => {
-    findRestaurantByFilter(Restaurants, "backstage", req, res)
+    pageSetting.sortField = req.query.sortType || "uploadDate"
+    pageSetting.currentPage = req.query.page || "1"
+    pageSetting.skipDataTotal = (parseInt(pageSetting.currentPage) - 1) * pageSetting.limit
+
+    findRestaurantByFilter(Restaurants, pageSetting, req, res)
 })
 
-//*排序
+//*排序與分頁
 router.get("/sort" , (req , res) =>{
-    findAllBySort(Restaurants , "backstage" , req , res)
+    pageSetting.sortField = req.query.sortType
+    pageSetting.currentPage = req.query.page
+    pageSetting.skipDataTotal = (parseInt(pageSetting.currentPage) - 1) * pageSetting.limit
+
+    findLimitBySort(Restaurants, pageSetting, req, res)
 })
-
-
 
 // *匯出路由模組
 module.exports = router

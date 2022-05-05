@@ -15,31 +15,59 @@ const findAllBySort = (Model , pageName , req , res) =>{
         .catch((error) => console.error(error))
 }
 
-const findRestaurantByFilter = (Model, pageName, req, res) => {
-    const keyword = req.query.keyword.trim()//* 從URL中傳來的 keyword引數
+const findLimitBySort = (Model, pageSetting ,req, res) => {
+    Model.find()
+        .skip(pageSetting.skipDataTotal)
+        .limit(pageSetting.limit)
+        .lean()
+        .sort(pageSetting.sortField)
+        .then((results) => {
+            res.render(pageSetting.pageName, {results, 
+                    sort: pageSetting.sortField, 
+                    pageNum: pageSetting.currentPage,
+                    scripts:pageSetting.scripts
+                 })
+        })
+        .catch((error) => console.error(error))
+}
+
+const findRestaurantByFilter = (Model, pageSetting, req, res) => {
+    const keyword = req.query.keyword.trim() //* 從URL中傳來的 keyword引數
     const reg = new RegExp(keyword, "i") //* 不區分大小寫
 
     if (keyword.length === 0) {
-        res.render(pageName, { keyword: "" })
+        res.render(pageSetting.pageName, { keyword: "" })
     } else {
         /** 多條件與模糊查詢指令
          *  多條件查詢: query.$or
          *  模糊查詢: query.$regex
          */
         Model.find({ $or: [{ name: { $regex: reg } }, { name_en: { $regex: reg } }] })
+            .skip(pageSetting.skipDataTotal)
+            .limit(pageSetting.limit)
             .lean()
             .then((results) => {
-                if (results.length === 0) {
-                    Model.find({ category: { $regex: reg } })
-                        .lean()
-                        .then((results) => res.render(pageName, { keyword, results }))
-                        .catch((error) => console.log(error))
-                } else {
-                    res.render(pageName, { keyword, results })
+                if (results.length !== 0){
+                    res.render(pageSetting.pageName, { keyword, 
+                                results, 
+                                sort: pageSetting.sortField,
+                                pageNum: pageSetting.currentPage,
+                                scripts:pageSetting.scripts
+                            })
+                    return
                 }
+
+                Model.find({ category: { $regex: reg } })
+                    .skip(pageSetting.skipDataTotal)
+                    .limit(pageSetting.limit)
+                    .lean()
+                    .then((results) => {
+                        res.render(pageSetting.pageName, { keyword, results, sort: pageSetting.sortField, pageNum: pageSetting.currentPage, scripts: pageSetting.scripts })
+                    })
+                    .catch((error) => console.log(error))
             })
             .catch((error) => console.log(error))
-    }    
+    }
 }
 
 const findById = (Model, pageName, req, res) => {
@@ -61,6 +89,32 @@ const findByIdAndUpdate = (Model , updateData , path , req , res)=>{
     Model.findByIdAndUpdate(id , updateData)
         .then(res.redirect(path))
         .catch(error=>console.log(error))
+}
+
+const returnFindAllCount = (Model) =>{
+    return Model.find()
+        .count()
+        .lean()
+        .then((result) => {return result})
+        .catch((error) => console.error(error))
+}
+
+const returnFindCount = (Model, req) => {
+    const keyword = req.query.keyword.trim() //* 從URL中傳來的 keyword引數
+    const reg = new RegExp(keyword, "i") //* 不區分大小寫
+    return Model.find({ $or: [{ name: { $regex: reg } }, { name_en: { $regex: reg } }] })
+        .count()
+        .lean()
+        .then((result) => {
+            if(result !== 0)  return result
+            
+            Model.find({ category: { $regex: reg } })
+                .count()
+                .lean()
+                .then(result => {return result})
+                .catch((error) => console.error(error))            
+        })
+        .catch((error) => console.error(error))
 }
 
 const returnFindAll = (Model) => {
@@ -100,10 +154,13 @@ const returnDeleteById = (Model , idArr) =>{
 
 module.exports = { findAll,
     findAllBySort,
+    findLimitBySort,
     findRestaurantByFilter, 
     findById,
     createOne,
     findByIdAndUpdate,
+    returnFindAllCount,
+    returnFindCount,
     returnFindAll,
     returnFindOne,
     returnFindById,

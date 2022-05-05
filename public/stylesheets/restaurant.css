@@ -67,9 +67,9 @@ hr {
   color: white;
 }
 
-.btn-second{
+.btn-second {
   background-color: #fce2cf;
-  color:#9b4b4b;
+  color: #9b4b4b;
   border-radius: 50%;
 }
 
@@ -83,18 +83,19 @@ hr {
   font-size: 15px !important;
 }
 
+/* #region  卡片 */
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.card img{
-  height: 180px;
+.card img {
+  height: 220px;
 }
 
-.card-title{
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .restaurant-category {
@@ -102,6 +103,37 @@ hr {
   font-size: 1rem;
 }
 
+/* #endregion */
+
+/* #region  分頁 */
+.pagination>li>a {
+  background-color: white;
+  color: #5A4181;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+  color: #5a5a5a;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.pagination>.active>a {
+  color: white;
+  background-color: #5A4181 !Important;
+  border: solid 1px #5A4181 !Important;
+}
+
+.pagination>.active>a:hover {
+  background-color: #5A4181 !Important;
+  border: solid 1px #5A4181;
+}
+
+/* #endregion */
+
+/* #region  詳細資料 */
 .restaurant-show-title {
   position: relative;
   top: -60px;
@@ -111,27 +143,30 @@ hr {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.list-group{
+.list-group {
   font-size: 1.3rem;
 }
 
+/* #endregion */
+
+
 @media screen and (max-width: 992px) {
-  .card img{
+  .card img {
     height: 115px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  
+
   .restaurant-show-title {
     font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 575px) {
-  
-  .card img{
+
+  .card img {
     height: auto;
   }
-  
+
 }
