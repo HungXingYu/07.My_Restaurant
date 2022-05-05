@@ -46,14 +46,10 @@ const findRestaurantByFilter = (Model, pageSetting, req, res) => {
             .skip(pageSetting.skipDataTotal)
             .limit(pageSetting.limit)
             .lean()
+            .sort(pageSetting.sortField)
             .then((results) => {
-                if (results.length !== 0){
-                    res.render(pageSetting.pageName, { keyword, 
-                                results, 
-                                sort: pageSetting.sortField,
-                                pageNum: pageSetting.currentPage,
-                                scripts:pageSetting.scripts
-                            })
+                if (results.length !== 0) {
+                    res.render(pageSetting.pageName, { keyword, results, sort: pageSetting.sortField, pageNum: pageSetting.currentPage, scripts: pageSetting.scripts })
                     return
                 }
 
@@ -61,6 +57,7 @@ const findRestaurantByFilter = (Model, pageSetting, req, res) => {
                     .skip(pageSetting.skipDataTotal)
                     .limit(pageSetting.limit)
                     .lean()
+                    .sort(pageSetting.sortField)
                     .then((results) => {
                         res.render(pageSetting.pageName, { keyword, results, sort: pageSetting.sortField, pageNum: pageSetting.currentPage, scripts: pageSetting.scripts })
                     })
