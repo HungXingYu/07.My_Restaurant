@@ -55,10 +55,10 @@
 <h2 id="4"> 專案畫面(Running the tests)</h2>
 
 ### 首頁
-![index](https://i.imgur.com/NvnWvou.gifv)
+[index](https://i.imgur.com/NvnWvou.gifv)
 
 ### 後台管理
-![backstage](https://i.imgur.com/2h0j5Sf.gifv)
+[backstage](https://i.imgur.com/2h0j5Sf.gifv)
 
 
 <h2 id="5"> 使用者故事(User Story)</h2>
