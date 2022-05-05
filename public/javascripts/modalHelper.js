@@ -90,7 +90,7 @@ if (dataError.length !== 0) {
         if (result.isConfirmed) {
             dataError.forEach((inputData) => {
                 inputData.dataset.error = ""
-                if(inputData.id !== "uploadBtn"){                    
+                if(inputData.id !== "uploadBtn" && inputData.id !== "category"){                    
                     inputData.value = ""
                     inputData.innerHTML = ""
                 }               
@@ -153,12 +153,12 @@ if(addCategoryBtn){
                             async function getCategory(url) {
                                 let response = await fetch(url)
                                 let categoryResult = await response.json()
-                                let optionHtml = ""
 
+                                $("#category").find("option").remove()
                                 categoryResult.forEach((category) => {
-                                    optionHtml += `<option value="${category.name}">${category.name}</option>`
+                                    $("#category").append( `<option value="${category.name}">${category.name}</option>`)
                                 })
-                                $("#category").find("option").remove().end().append(optionHtml)
+                                
                                 $("#category").selectpicker("refresh")
                             }
                             getCategory("/backstage/restaurants/category")
