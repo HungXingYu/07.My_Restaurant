@@ -1,6 +1,7 @@
 //*搜尋
 const searchBar = document.querySelector("#searchBar")
 const restaurantList = document.querySelector("#restaurantList .col")
+const noData = document.querySelector("#noData")
 //*新增餐廳類別
 const addCategoryBtn = document.querySelector("#addCategory")
 //*上傳
@@ -41,15 +42,17 @@ function callYesNoMsg(msgTitle) {
 
 
 //#region - 搜尋餐廳查無資料
-if (searchBar && !restaurantList) {
-    let msgTitle = "查無資料"
-    let msgHtml = "<b>您輸入的關鍵字查無資料，請重新輸入關鍵字再查詢</b>"
-    callErrorMsg(msgTitle, msgHtml).then((result) => {
-        if (result.isConfirmed) {
-            const href = location.href.split("?")[0].replace("search", "")
-            window.location.href = href
-        }
-    })
+if ( noData && searchBar && !restaurantList) {
+    if(noData.style.display === "none"){
+        let msgTitle = "查無資料"
+        let msgHtml = "<b>您輸入的關鍵字查無資料，請重新輸入關鍵字再查詢</b>"
+        callErrorMsg(msgTitle, msgHtml).then((result) => {
+            if (result.isConfirmed) {
+                const href = location.href.split("?")[0].replace("search", "")
+                window.location.href = href
+            }
+        })
+    } 
 }
 //#endregion -
 
@@ -93,7 +96,7 @@ if (dataError.length !== 0) {
                 if(inputData.id !== "uploadBtn" && inputData.id !== "category"){                    
                     inputData.value = ""
                     inputData.innerHTML = ""
-                }               
+                }
             })
         }
     })

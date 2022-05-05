@@ -12,7 +12,7 @@ db.once('open', () => {
             location: restaurant.location.trim(),
             phone: restaurant.phone.trim(),
             google_map: restaurant.google_map.trim(),
-            rating: restaurant.rating.trim(),
+            rating: restaurant.rating,
             description: restaurant.description.trim(),
             uploadDate: restaurant.uploadDate.trim()
         })

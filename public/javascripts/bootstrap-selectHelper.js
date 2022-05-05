@@ -40,7 +40,7 @@ if (sort) {
         let allDataCount = await response.json()
         let totalPages = Math.ceil(parseInt(allDataCount) / perPageItems)
         let currentPage = parseInt($("#pagination").attr("data-currentPage"))
-        
+
         //* 總頁數為1時不顯示分頁插件
         if (totalPages === 1) return
 

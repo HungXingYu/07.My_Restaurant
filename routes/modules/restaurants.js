@@ -18,6 +18,7 @@ const datetime = require('node-datetime')
 
 async function keepFormData(pageName ,req ,  res) {
     const inputData = req.body
+    inputData._id = req.params.id
     //透過 await 暫停 Promise : returnFindAll，“等待” resolve 結果(在此為mongoose執行.then()結果回傳後，在賦值至 category 。
     const category = await returnFindAll(RestaurantCategory)
     const definedErrorMsg = req.definedErrorMsg

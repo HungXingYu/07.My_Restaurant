@@ -82,10 +82,18 @@ if(deleteBtn){
           }
       })
 
-      const msgText = `您勾選了${checkedCount}筆餐廳，是否確定刪除?`
-      const ajaxUrl = "/backstage/restaurants/batch"
-      const ajaxBody = `id=${checkedIdArr}&count=${checkedCount}`
-      deleteData(msgText , ajaxUrl , ajaxBody)
+      let msgTitle =""
+      let msgHtml = ""
+      if(checkedCount === 0){
+        msgTitle="勾選錯誤"
+        msgHtml = `<b>您尚未勾選任何項目，無法進行刪除</b>`
+        callErrorMsg(msgTitle, msgHtml)
+      }else{
+        msgHtml = `您勾選了${checkedCount}筆餐廳，是否確定刪除?`
+        const ajaxUrl = "/backstage/restaurants/batch"
+        const ajaxBody = `id=${checkedIdArr}&count=${checkedCount}`
+        deleteData(msgHtml, ajaxUrl, ajaxBody)
+      }
   })
 }
 

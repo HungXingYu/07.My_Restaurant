@@ -22,11 +22,21 @@ const findLimitBySort = (Model, pageSetting ,req, res) => {
         .lean()
         .sort(pageSetting.sortField)
         .then((results) => {
-            res.render(pageSetting.pageName, {results, 
-                    sort: pageSetting.sortField, 
+            if(results.length > 0){
+                res.render(pageSetting.pageName, {results, 
+                    sort: pageSetting.sortField,
+                    display:"none",
                     pageNum: pageSetting.currentPage,
                     scripts:pageSetting.scripts
                  })
+            }else{
+                res.render(pageSetting.pageName, {results, 
+                    sort: pageSetting.sortField,
+                    display:"",
+                    pageNum: pageSetting.currentPage,
+                    scripts:pageSetting.scripts
+                 })
+            }           
         })
         .catch((error) => console.error(error))
 }
@@ -36,7 +46,7 @@ const findRestaurantByFilter = (Model, pageSetting, req, res) => {
     const reg = new RegExp(keyword, "i") //* 不區分大小寫
 
     if (keyword.length === 0) {
-        res.render(pageSetting.pageName, { keyword: "" })
+        res.render(pageSetting.pageName, { keyword: "" , display:"none" })
     } else {
         /** 多條件與模糊查詢指令
          *  多條件查詢: query.$or
@@ -49,7 +59,12 @@ const findRestaurantByFilter = (Model, pageSetting, req, res) => {
             .sort(pageSetting.sortField)
             .then((results) => {
                 if (results.length !== 0) {
-                    res.render(pageSetting.pageName, { keyword, results, sort: pageSetting.sortField, pageNum: pageSetting.currentPage, scripts: pageSetting.scripts })
+                    res.render(pageSetting.pageName, { keyword, 
+                        results, 
+                        sort: pageSetting.sortField,
+                        display:"none",
+                        pageNum: pageSetting.currentPage, 
+                        scripts: pageSetting.scripts })
                     return
                 }
 
@@ -59,7 +74,12 @@ const findRestaurantByFilter = (Model, pageSetting, req, res) => {
                     .lean()
                     .sort(pageSetting.sortField)
                     .then((results) => {
-                        res.render(pageSetting.pageName, { keyword, results, sort: pageSetting.sortField, pageNum: pageSetting.currentPage, scripts: pageSetting.scripts })
+                        res.render(pageSetting.pageName, { keyword, 
+                            results, 
+                            sort: pageSetting.sortField,
+                            display:"none",
+                            pageNum: pageSetting.currentPage, 
+                            scripts: pageSetting.scripts })
                     })
                     .catch((error) => console.log(error))
             })

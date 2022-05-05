@@ -29,7 +29,7 @@ router.get("/search", (req, res) => {
     pageSetting.sortField = req.query.sortType || "uploadDate"
     pageSetting.currentPage = req.query.page || "1"
     pageSetting.skipDataTotal = (parseInt(pageSetting.currentPage) - 1) * pageSetting.limit
-    
+
     findRestaurantByFilter(Restaurants, pageSetting, req, res)
 })
 

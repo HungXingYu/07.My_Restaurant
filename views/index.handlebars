@@ -39,6 +39,9 @@
   
   <hr>
   <!-- restaurant list -->
+  <div  style="display:{{display}}" id="noData">
+    <h1>尚未新增任何餐廳資料，請先至後臺管理新增資料</h1>
+  </div>
   <div class="row row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"  id="restaurantList">
     {{#each results}}
     <div class="col">     
