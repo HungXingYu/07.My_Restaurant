@@ -79,54 +79,54 @@
 
 <h2 id="6">專案安裝流程(Installing)</h2>
 
->1. 打開終端機(Git Bash or Terminal)，進入您要clone此專案的目錄底下(EX：D槽)
->```
->$ cd d:
->```
+1. 打開終端機(Git Bash or Terminal)，進入您要clone此專案的目錄底下(EX：D槽)
+```
+$ cd d:
+```
 
->2. Clone 此專案至該目錄底下
->```
->$  git clone https://github.com/HungXingYu/07.My_Restaurant.git
->```
+2. Clone 此專案至該目錄底下
+```
+$  git clone https://github.com/HungXingYu/07.My_Restaurant.git
+```
 
->3. 進入此專案資料夾
->```
->$ cd 07.My_Restaurant
->```
+3. 進入此專案資料夾
+```
+$ cd 07.My_Restaurant
+```
 
->4. 安裝npm套件
->```
->$  npm install
->```
+4. 安裝npm套件
+```
+$  npm install
+```
 
->5. 新增.env建立環境變數
->```
->在/07.My_Restaurant底下，也就是該專案的根目錄資料夾新增.env，並在.env內設定環境變數:MONGODB_URI
->```
+5. 新增.env建立環境變數
+```
+在/07.My_Restaurant底下，也就是該專案的根目錄資料夾新增.env，並在.env內設定環境變數:MONGODB_URI
+```
 
->6. 新增種子資料
->```
->$ npm run seed
->```
->當終端機出現以下內容，代表資料新增完成
->```
->Restaurants collection done
->RestaurantCategory collection done
->```
+6. 新增種子資料
+```
+$ npm run seed
+```
+當終端機出現以下內容，代表資料新增完成
+```
+Restaurants collection done
+RestaurantCategory collection done
+```
 
->7. 啟動伺服器並執行app.js
->```
->$ nodemon app.js
->```
->當終端機最後出現以下內容，代表伺服器成功啟動
->```
->Express app listening on port 3000.
->mongodb connected!
->```
+7. 啟動伺服器並執行app.js
+```
+$ nodemon app.js
+```
+當終端機最後出現以下內容，代表伺服器成功啟動
+```
+Express app listening on port 3000.
+mongodb connected!
+```
 
->8. 開啟任一瀏覽器，輸入 http://localhost:3000 即可開始使用此專案
+8. 開啟任一瀏覽器，輸入 http://localhost:3000 即可開始使用此專案
 
->9. 若要關閉程式請在終端機使用Ctrl+C
+9. 若要關閉程式請在終端機使用Ctrl+C
 
 <h2 id="7">專案開發人員(Contributor)</h2>
 
