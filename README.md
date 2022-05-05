@@ -107,9 +107,7 @@ $  npm install
 >6. 新增種子資料
 ```
 $ npm run seed
-```
 當終端機出現以下內容，代表資料新增完成
-```
 Restaurants collection done
 RestaurantCategory collection done
 ```
@@ -117,9 +115,7 @@ RestaurantCategory collection done
 >7. 啟動伺服器並執行app.js
 ```
 $ nodemon app.js
-```
 當終端機最後出現以下內容，代表伺服器成功啟動
-```
 Express app listening on port 3000.
 mongodb connected!
 ```
