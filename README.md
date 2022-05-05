@@ -120,9 +120,9 @@ Express app listening on port 3000.
 mongodb connected!
 ```
 
-8. 開啟任一瀏覽器，輸入 http://localhost:3000 即可開始使用此專案
+>8. 開啟任一瀏覽器，輸入 http://localhost:3000 即可開始使用此專案
 
-9. 若要關閉程式請在終端機使用Ctrl+C
+>9. 若要關閉程式請在終端機使用Ctrl+C
 
 <h2 id="7">專案開發人員(Contributor)</h2>
 
