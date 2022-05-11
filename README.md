@@ -60,6 +60,9 @@
 ### 後台管理
 [backstage](https://i.imgur.com/2h0j5Sf.gifv)
 
+### Heroku
+https://nameless-woodland-00373.herokuapp.com/
+
 
 <h2 id="5"> 使用者故事(User Story)</h2>
 
